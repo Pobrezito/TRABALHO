@@ -19,24 +19,7 @@ jobs:
 
       - name: Validar Commits
         run: |
-          commitlint --from=origin/main
+          npm ci
+          npx commitlint --from=HEAD~1
 
-      - name: Geração Automática de Versão
-        run: |
-          npx semantic-release
-
-      - name: Instalar Dependências
-        run: npm install
-
-      - name: Executar Testes
-        run: npm test
-
-      - name: Construir Artefatos
-        run: npm run build
-
-      # Implantação em ambiente de produção
-      - name: Implantação em Produção
-        run: |
-          # Comando para implantar os artefatos em um ambiente de produção
-          # Substitua este comando pelo necessário para sua infraestrutura de implantação
-          echo "Implantar artefatos em ambiente de produção"
+      - name: Geração Autom
