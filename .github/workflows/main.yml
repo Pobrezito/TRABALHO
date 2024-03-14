@@ -15,12 +15,11 @@ jobs:
 
       - name: Instalar Dependências
         run: |
-          npm install -g @commitlint/{cli,config-conventional}
-          npm install -g semantic-release @semantic-release/changelog @semantic-release/git
+          npm install @commitlint/{cli,config-conventional} semantic-release @semantic-release/changelog @semantic-release/git
 
       - name: Validar Commits
         run: |
-          commitlint --from=HEAD~1
+          commitlint --from=origin/main
 
       - name: Geração Automática de Versão
         run: |
@@ -33,10 +32,11 @@ jobs:
         run: npm test
 
       - name: Construir Artefatos
-        run: npm build
+        run: npm run build
 
       # Implantação em ambiente de produção
       - name: Implantação em Produção
         run: |
           # Comando para implantar os artefatos em um ambiente de produção
-          # Substitua este comando pelo necessário para sua infraestrut
+          # Substitua este comando pelo necessário para sua infraestrutura de implantação
+          echo "Implantar artefatos em ambiente de produção"
