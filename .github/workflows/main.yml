@@ -1,6 +1,42 @@
 name: CI/CD Pipeline
+
 on:
   push:
     branches:
       - main
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v2
+
+      - name: Instalar Dependências
+        run: |
+          npm install -g @commitlint/{cli,config-conventional}
+          npm install -g semantic-release @semantic-release/changelog @semantic-release/git
+
+      - name: Validar Commits
+        run: |
+          commitlint --from=HEAD~1
+
+      - name: Geração Automática de Versão
+        run: |
+          npx semantic-release
+
+      - name: Instalar Dependências
+        run: npm install
+
+      - name: Executar Testes
+        run: npm test
+
+      - name: Construir Artefatos
+        run: npm build
+
+      # Implantação em ambiente de produção
+      - name: Implantação em Produção
+        run: |
+          # Comando para implantar os artefatos em um ambiente de produção
+          # Substitua este comando pelo necessário para sua infraestrut
