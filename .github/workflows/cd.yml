@@ -29,17 +29,13 @@ jobs:
     - name: Build
       run: npm run build --if-present
      
-    - name: Run tests and linting
-      run: |
-        npm test
-        npx eslint src/**/*.ts
-        npx ts-prune
+    - name: Run tests
+      run: npm test
+      - name: Lint
+        run: npx eslint src/**/*.ts
+
+      - name: Run ts-proune
+        run: npx ts-prune
 
     - name: Zip
-      # Add your zipping command here
-      # For example: run: zip -r myFiles.zip <source_folder>
 
-      run: zip build.zip dist
-      
-    - name: Deploy
-      run: echo Deploy completed successfully
